@@ -1,4 +1,4 @@
-let diaSemana = 'mArtes';
+let diaSemana = 'Martes';
 
 let diaSemanaMinusculas = diaSemana.toLowerCase();
 
@@ -31,6 +31,33 @@ switch (diaSemanaMinusculas) {
     break;
   case 'domingo':
     console.log('No es dia laborable');
+  default:
+    console.log('O valor introducido non e un dia da semana');
 
     break;
 }
+
+//Otra posible solucion
+
+// let diaSemana = 'Martes';
+
+// let diaSemanaMinusculas = diaSemana.toLowerCase();
+
+// switch (diaSemanaMinusculas) {
+//   case 'lunes':
+//   case 'martes':
+//   case 'miercoles':
+//   case 'jueves':
+//   case 'viernes':
+
+//     console.log('Es dia laborable');
+//     break;
+//   case 'sabado':
+//   case 'domingo':
+//     console.log('No es dia laborable');
+//       break;
+//   default:
+//     console.log('O valor introducido non e un dia da semana');
+
+//     break;
+// }
