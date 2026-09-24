@@ -8,9 +8,9 @@ console.log(
 
 function numeroAleatorio(num1, num2) {
   if (num1 > num2) {
-    return Math.ceil(Math.random(num1 - num2) * num1);
+    return Math.ceil(Math.random()*(num1 - num2 +1) + num2);
   } else {
-    return Math.ceil(Math.random(num2 - num1) * num2);
+    return Math.ceil(Math.random()*(num2 - num1) + num1);
   }
 }
 
