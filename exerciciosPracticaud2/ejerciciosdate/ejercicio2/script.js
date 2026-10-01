@@ -32,3 +32,11 @@ function numDias(mes, ano) {
 }
 
 console.log(numDias(2, 2024));
+
+// function  getDaysInMonth(month, year) {
+//   return new Date(year,month,0).getDate()
+// }
+
+// let ano = 2024;
+
+// console.log(`O nunero de días de febreiro de ${ano} dou ${getDaysInMonth(2,ano)}`);
