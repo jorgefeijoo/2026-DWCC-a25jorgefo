@@ -11,13 +11,14 @@ for (const element of game.scored) {
 let scorers = {};
 let contador = 1;
 
-for (let index = 0; index < game.scored.length; index++) {
-  const element = game.scored[index];
-
-  if (!Object.hasOwn(scorers, element)) {
+for (const element of game.scored) {
+   if (!Object.hasOwn(scorers, element)) {
     scorers[element] = 1;
   } else {
     scorers[element]++;
-  }
+   }
 }
-console.log(scorers);
+ console.log(scorers);
+
+ 
+

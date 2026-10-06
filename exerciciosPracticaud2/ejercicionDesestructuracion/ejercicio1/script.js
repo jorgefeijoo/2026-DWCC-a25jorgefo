@@ -28,8 +28,7 @@ const players = [
 ];
 
 //parte 1
-let players1,players2;
-[players1,players2]=players;
+const [players1,players2]=players;
 
 //parte 2
 const [gk, ...fieldPlayers]=players1
@@ -43,7 +42,7 @@ const allPlayers=[...players1, ...players2]
 console.log(allPlayers);
 
 //parte 4
-players1.splice(players1.length , 0,'Thiago','Coutinho','Perisic')
+let players1Final=[...players1,'Thiago','Coutinho','Perisic']
 
-console.log(players1);
+console.log(players1Final);
 
