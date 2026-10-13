@@ -1,21 +1,27 @@
 function buscarPatron(texto, patron) {
-    let contador = 0
+    let encontrados = 0
     let textoMayusculas = texto.toUpperCase()
     let patronMayusculas = patron.toUpperCase()
 
 
-    for (let i = 0; i < textoSeparado.length; i++) {
-        textoMinusculas = textoSeparado[i].toLowerCase()
-        for (let j = 0; j < patronSeparado.length; j++) {
-            patronMinusculas = patronSeparado[j].toLowerCase()
-            // console.log(patronMinusculas);
+    for (let i = 0; i < textoMayusculas.length; i++) {
+        let numeroCoincidencias = 0
+        for (let j = 0; j < patronMayusculas.length; j++) {
+            if (texto[i + j] == patron[j]) {
+                numeroCoincidencias++;
+            }
 
         }
-        console.log(textoMinusculas);
+
+        if (numeroCoincidencias == patron.length) {
+            encontrados++;
+        }
     }
+    return encontrados
 
 
 }
 
-buscarPatron('000111101000ABCHA', '00')
 
+
+console.log(buscarPatron('000111101000ABCHA', '00'));
