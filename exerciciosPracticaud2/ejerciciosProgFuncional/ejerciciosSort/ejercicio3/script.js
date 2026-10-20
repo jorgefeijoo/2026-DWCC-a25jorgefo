@@ -69,7 +69,7 @@ console.log(arrayOrdenadoFecha);
 //f. Calcula a suma dos anos que viviron todos os inventores.
 
 function reducer(accumulator, currentValue, index) {
-    const returns = accumulator + currentValue.year;
+    const returns = accumulator + currentValue.passed - currentValue.year;
     return returns;
 }
 
