@@ -1,14 +1,22 @@
 const lista = document.getElementById("listaAnimais")
-const todosUl = lista.querySelectorAll("ul")
-const arrayUl = Array.from(todosUl)
+const todosli = lista.querySelectorAll("li")
 
 // console.log(arrayUl);
 // console.log(todosUl);
 
-for (let i = 0; i < arrayUl.length; i++) {
-    const element = arrayUl[i];
-    console.log(element);
+for (const element of todosli) {
+    const tieneUl = element.querySelector("ul")
 
+    if (tieneUl) {
+        const numeroDeHijos = tieneUl.children.length
 
-
+        console.log(numeroDeHijos);
+        
+        tieneUl.before("[" +numeroDeHijos + "]")
+    }
+    
 }
+
+    
+    
+
