@@ -1,7 +1,4 @@
 const tabla = document.getElementById("taboaOrdenar")
-const arrayFilas = Array.from(tabla.rows);
-let arrayColumnas = []
-const arrayNomes = []
 
 
 // for (let i = 0; i < arrayFilas.length; i++) {
@@ -18,9 +15,7 @@ const arrayNomes = []
 //     }
 // }
 
-const todosTr = document.querySelectorAll("tbody tr")
-const arrayTr = Array.from(todosTr)
-arraytr
+
 // const mapTr = arrayTr.map(
 //     function ordenarNombres(tr) {
 //         const primeroTd = tr.querySelector("td")
@@ -28,7 +23,36 @@ arraytr
 
 //     }
 // )
-console.log(mapTr);
+
+const tbody = document.querySelector("tbody")
+const todosTr = document.querySelectorAll("tbody tr")
+const arrayTr = Array.from(todosTr)
+
+function compareNumbers(a, b) {
+    const nombreA = a.children[0].innerText
+    const nombreB = b.children[0].innerText
+
+
+    if (nombreA < nombreB) {
+        return -1;
+    } else if (nombreA > nombreB) {
+        return 1;
+    } else
+        return 0;
+
+    // return nombreA - nombreB
+}
+const arrayOrdenado = arrayTr.sort(compareNumbers);
+
+for (const element of arrayOrdenado) {
+    tbody.append(element);
+}
+
+
+
+
+
+
 
 
 
