@@ -25,9 +25,9 @@ for (const element of nomeSexo) {
     }
 }
 
-const nomeSexo2 = document.querySelectorAll('form label > input')[4]
-console.log('separacion');
-console.log(nomeSexo2.value);
+// const nomeSexo2 = document.querySelectorAll('form label > input')[4]
+// console.log('separacion');
+// console.log(nomeSexo2.value);
 
 
 //● O texto de cada un dos elementos < li >

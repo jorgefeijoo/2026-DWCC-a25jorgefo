@@ -40,7 +40,7 @@ function compareNumbers(a, b) {
     } else
         return 0;
 
-    // return nombreA - nombreB
+
 }
 const arrayOrdenado = arrayTr.sort(compareNumbers);
 

@@ -3,13 +3,13 @@
 // Engade a clase CSS "color-title" ao elemento con id "tituloPrincipal" 
 
 const tituloPrincipal = document.getElementById("tituloPrincipal")
-tituloPrincipal.classList = "color-title"
+tituloPrincipal.classList.add("color-title")
 
 // Crea un novo elemento <li> coa clase CSS "item-lista" e o texto "Item 5". Engade este elemento á lista desordenada
 
 const ul = document.getElementById("lista");
 const novoLi = document.createElement("li");
-novoLi.classList = "item-lista";
+novoLi.className = "item-lista";
 const texto = document.createTextNode('Item 5');
 novoLi.append(texto);
 ul.append(novoLi);
