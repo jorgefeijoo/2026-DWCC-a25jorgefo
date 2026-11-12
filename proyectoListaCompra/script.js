@@ -1,23 +1,37 @@
 const lista = document.getElementById("lista")
 const botonAñadirElemento = document.querySelector("button")
 const botonBorrarTodo = document.getElementById("borrarTodo")
-const todosLi = document.querySelectorAll("#lista li")
+let todosLi = document.querySelectorAll("#lista li")
 const textoFiltrar = document.getElementById("filtrar")
+let liseleccionado = null
+const valorTexto = document.getElementById
+    ("textoEngadirElemento")
+valorTexto.value = ""
+const arrayValores = []
 
 
+let listaCompra = JSON.parse(localStorage.getItem('lista', lista)) || []
 
-if (lista.children.length > 0) {
+for (const element of listaCompra) {
+    const li = document.createElement("li")
+    const botonBorrar = document.createElement("button")
+    botonBorrar.append("X")
+    li.append(document.createTextNode(element))
+    li.append(botonBorrar)
+    lista.append(li)
     botonBorrarTodo.type = "button"
+
 }
 
+
 function engadirElementos() {
-    const arrayLi = Array.from(todosLi)
+    let todosLi = document.querySelectorAll("#lista li")
+    let arrayLi = Array.from(todosLi)
     const li = document.createElement("li")
     const valorTexto = document.getElementById
         ("textoEngadirElemento")
     const botonBorrar = document.createElement("button")
     botonBorrar.append("X")
-    const arrayValores = []
     for (const element of arrayLi) {
         arrayValores.push(element.firstChild.textContent.trim())
     }
@@ -27,8 +41,22 @@ function engadirElementos() {
         li.append(document.createTextNode(valorTexto.value))
         li.append(botonBorrar)
         lista.append(li)
+        botonBorrarTodo.type = "button"
+        engadirLocalStorage()
+
     }
     valorTexto.value = ""
+}
+
+function engadirLocalStorage() {
+    let arrayLi = Array.from(lista.children)
+    const arrayValores = []
+    for (const element of arrayLi) {
+        arrayValores.push(element.firstChild.textContent.trim())
+    }
+    const listaLocal = JSON.stringify(arrayValores)
+    localStorage.setItem('lista', listaLocal)
+
 }
 
 
@@ -40,14 +68,24 @@ function borrarElementos(e) {
         if (confirmacion) {
             parent = e.target.parentElement
             parent.remove()
+            engadirLocalStorage()
+
+        }
+        if (lista.children.length == 0) {
+            botonBorrarTodo.type = "hidden"
+
         }
 
     }
 }
 function borrarTodo() {
-    for (const element of todosLi) {
-        element.remove()
-    }
+    lista.innerHTML = ""
+
+    botonBorrarTodo.type = "hidden"
+
+    localStorage.removeItem("lista")
+
+
 }
 
 function filtrarElemento() {
@@ -78,19 +116,22 @@ function cambiarTexto() {
 }
 
 function actualizarElemento(e) {
-    let liPulsado = e.target
-    liPulsado.classList.add('colorFondo')
-    liPulsado.style.backgroundColor == "yellow"
-    console.log(liPulsado);
 
-    botonAñadirElemento.removeEventListener('click', engadirElementos)
-    const valorTexto = document.getElementById
-        ("textoEngadirElemento")
     if (e.target.tagName == "LI") {
+        if (liseleccionado) {
+            liseleccionado.style.backgroundColor = ""
+            liseleccionado.classList.remove("colorFondo")
+        }
+        liseleccionado = e.target
+        liseleccionado.classList.add('colorFondo')
+        botonAñadirElemento.removeEventListener('click', engadirElementos)
+        const valorTexto = document.getElementById
+            ("textoEngadirElemento")
         botonAñadirElemento.innerText = "Actualizar elemento";
         valorTexto.value = e.target.firstChild.textContent
+        botonAñadirElemento.addEventListener('click', cambiarTexto)
     }
-    botonAñadirElemento.addEventListener('click', cambiarTexto)
+
 
 
 
@@ -98,13 +139,19 @@ function actualizarElemento(e) {
 
 }
 
-lista.addEventListener('click', actualizarElemento)
+function init() {
+    lista.addEventListener('click', actualizarElemento)
 
-textoFiltrar.addEventListener('keyup', filtrarElemento)
+    textoFiltrar.addEventListener('keyup', filtrarElemento)
 
-botonAñadirElemento.addEventListener('click', engadirElementos)
+    botonAñadirElemento.addEventListener('click', engadirElementos)
 
-lista.addEventListener("click", borrarElementos)
+    lista.addEventListener("click", borrarElementos)
 
-botonBorrarTodo.addEventListener('click', borrarTodo)
+    botonBorrarTodo.addEventListener('click', borrarTodo)
+}
+
+init()
+
+
 
