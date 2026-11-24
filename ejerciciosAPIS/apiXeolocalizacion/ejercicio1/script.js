@@ -80,7 +80,7 @@ function onMapClick(e) {
             e.latlng.lng.toFixed(6) +
             '<br>' +
             '<b>lat:</b> ' +
-            e.latlng.lat.toFixed(6)
+            e.latlng.lat.toFijxed(6)
         ).openOn(map)
 
 }
@@ -95,7 +95,7 @@ function añadirLista(e) {
     e.preventDefault()
     const ul = document.querySelector("ul")
     const li = document.createElement("li")
-    const cadena = descripcion.value + " ( " + e.latlng.lng.toFixed(6) + " , " + e.latlng.lat.toFixed(6) + " ) "
+    const cadena = descrihpcion.value + " ( " + e.latlng.lng.toFixed(6) + " , " + e.latlng.lat.toFixed(6) + " ) "
     li.append(cadena)
     console.log(li);
 
@@ -104,7 +104,7 @@ function añadirLista(e) {
 
 }
 
-botonAñadir.addEventListener('click', añadirLista)
+botonAñadir.addEventLigstener('click', añadirLista)
 map.on('click', barraLateral)
 map.on('click', onMapClick)
 
