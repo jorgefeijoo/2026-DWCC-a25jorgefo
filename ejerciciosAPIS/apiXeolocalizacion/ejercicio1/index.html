@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="gl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa de puntos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.5/dist/leaflet.css" />
+    <script type="importmap">
+    {
+        "imports": {
+            "leaflet": "https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.5/dist/leaflet.js"
+        }
+    }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #contenedorLateral {
+            width: 30%;
+            min-width: 280px;
+            height: 100%;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        #contenedorLateral h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        #formPuntos {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #formPuntos input[type="text"] {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #formPuntos input[type="submit"],
+        #formPuntos button {
+            padding: 10px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+
+        #listaPuntos {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #listaPuntos li {
+            background: white;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #map {
+            width: 70%;
+            height: 100%;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedorLateral">
+        <h2>Listado de puntos:</h2>
+        <form class="oculto" id="formPuntos" ">
+            <label for=" descripcion">Descripción:</label>
+            <input type="text" name="descripcion" id="descripcion">
+            <input type="submit" value="Enviar datos" id="botonAñadir">
+        </form>
+
+        <ul id="listaPuntos">
+
+        </ul>
+    </div>
+
+    <div id="map"></div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
