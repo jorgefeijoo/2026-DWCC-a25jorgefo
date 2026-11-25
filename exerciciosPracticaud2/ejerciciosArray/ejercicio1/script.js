@@ -10,3 +10,5 @@ function indices(elemento, arrayElementos) {
 }
 
 console.log(indices(1, numeros));
+
+

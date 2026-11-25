@@ -37,6 +37,11 @@ const formulario = document.getElementById("formPuntos")
 const map = new LeafletMap('map').setView([42.8805, -8.5456], 13);
 const botonAñadir = document.getElementById("botonAñadir")
 const descripcion = document.getElementById("descripcion")
+const lista = document.querySelector("ul")
+let latitude = 0
+let longitude = 0
+let arrayLista = []
+let marker
 
 if ("geolocation" in navigator) {
     /* geolocation is available */
@@ -70,8 +75,10 @@ new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let popup = new Popup();
 
 function onMapClick(e) {
-    let marker = new Marker(e.latlng).addTo(map);
+     marker = new Marker(e.latlng).addTo(map);
 
+     /*
+     esto es del ejercicio 1
     popup
         .setLatLng(e.latlng)
         .setContent(
@@ -80,31 +87,72 @@ function onMapClick(e) {
             e.latlng.lng.toFixed(6) +
             '<br>' +
             '<b>lat:</b> ' +
-            e.latlng.lat.toFijxed(6)
+            e.latlng.lat.toFixed(6)
         ).openOn(map)
+        */
 
 }
 
 function barraLateral(e) {
-    formulario.classList.remove('oculto')
+    formulario.classList.toggle('oculto')
     descripcion.focus()
+    latitude = e.latlng.lat.toFixed(6)
+    longitude = e.latlng.lng.toFixed(6)
 }
 
 //tengo que crear unas variables fuera para guardarle el valor de las coordenadas y  darles el valor en barralateral y despues usarlas en añadir lista
 function añadirLista(e) {
     e.preventDefault()
+    let elementosLista = {}
     const ul = document.querySelector("ul")
     const li = document.createElement("li")
-    const cadena = descrihpcion.value + " ( " + e.latlng.lng.toFixed(6) + " , " + e.latlng.lat.toFixed(6) + " ) "
+    const boton = document.createElement("button")
+    boton.textContent="X"
+    const cadena = descripcion.value
+    elementosLista['descripcion'] = descripcion.value
+    elementosLista['latitude'] = latitude
+    elementosLista['longitude'] = longitude
+    arrayLista.push(elementosLista)
     li.append(cadena)
-    console.log(li);
-
+    li.append(boton)
     ul.append(li)
-
-
+    descripcion.value = ""
+    formulario.classList.toggle("oculto")
+    console.log(arrayLista);
 }
 
-botonAñadir.addEventLigstener('click', añadirLista)
+function redireccionarMapa(e) {
+    if (e.target.tagName == "LI") {
+        
+        
+        for (const element of arrayLista) {
+            if (e.target.firstChild.textContent == element.descripcion) {
+                map.setView([element.latitude, element.longitude], 17);
+                console.log(element.descripcion);
+            }
+        }
+
+
+    }
+}
+
+
+
+function eliminarPunto(e) {
+    if (e.target.tagName == "BUTTON") {
+        console.log(e.target.parentElement.firstChild.textContent);
+        for (const element of arrayLista) {
+            if (e.target.parentElement.firstChild.textContent == element.descripcion) {
+                    e.target.parentElement.remove()
+                    map.removeLayer(marker)
+            }
+        }
+    }
+}
+
+lista.addEventListener('click',eliminarPunto)
+lista.addEventListener('click', redireccionarMapa)
+botonAñadir.addEventListener('click', añadirLista)
 map.on('click', barraLateral)
 map.on('click', onMapClick)
 
