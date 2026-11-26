@@ -75,21 +75,21 @@ new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let popup = new Popup();
 
 function onMapClick(e) {
-     marker = new Marker(e.latlng).addTo(map);
+    marker = new Marker(e.latlng).addTo(map);
 
-     /*
-     esto es del ejercicio 1
-    popup
-        .setLatLng(e.latlng)
-        .setContent(
-            'You clicked the map at -<br>' +
-            '<b>lon:</b> ' +
-            e.latlng.lng.toFixed(6) +
-            '<br>' +
-            '<b>lat:</b> ' +
-            e.latlng.lat.toFixed(6)
-        ).openOn(map)
-        */
+    /*
+    esto es del ejercicio 1
+   popup
+       .setLatLng(e.latlng)
+       .setContent(
+           'You clicked the map at -<br>' +
+           '<b>lon:</b> ' +
+           e.latlng.lng.toFixed(6) +
+           '<br>' +
+           '<b>lat:</b> ' +
+           e.latlng.lat.toFixed(6)
+       ).openOn(map)
+       */
 
 }
 
@@ -107,11 +107,12 @@ function añadirLista(e) {
     const ul = document.querySelector("ul")
     const li = document.createElement("li")
     const boton = document.createElement("button")
-    boton.textContent="X"
+    boton.textContent = "X"
     const cadena = descripcion.value
     elementosLista['descripcion'] = descripcion.value
     elementosLista['latitude'] = latitude
     elementosLista['longitude'] = longitude
+    elementosLista['marcador'] = marker
     arrayLista.push(elementosLista)
     li.append(cadena)
     li.append(boton)
@@ -123,8 +124,8 @@ function añadirLista(e) {
 
 function redireccionarMapa(e) {
     if (e.target.tagName == "LI") {
-        
-        
+
+
         for (const element of arrayLista) {
             if (e.target.firstChild.textContent == element.descripcion) {
                 map.setView([element.latitude, element.longitude], 17);
@@ -141,16 +142,22 @@ function redireccionarMapa(e) {
 function eliminarPunto(e) {
     if (e.target.tagName == "BUTTON") {
         console.log(e.target.parentElement.firstChild.textContent);
-        for (const element of arrayLista) {
+        for (let i = 0; i < arrayLista.length; i++) {
+            const element = arrayLista[i];
             if (e.target.parentElement.firstChild.textContent == element.descripcion) {
-                    e.target.parentElement.remove()
-                    map.removeLayer(marker)
+                e.target.parentElement.remove()
+                arrayLista.splice(element, element)
+                map.removeLayer(element.marcador)
+                console.log(arrayLista);
+
             }
         }
     }
 }
 
-lista.addEventListener('click',eliminarPunto)
+
+
+lista.addEventListener('click', eliminarPunto)
 lista.addEventListener('click', redireccionarMapa)
 botonAñadir.addEventListener('click', añadirLista)
 map.on('click', barraLateral)
